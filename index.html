@@ -876,28 +876,46 @@
                         </h3>
 
                         <!-- FORM -->
-                        <form id="formData" class="space-y-6">
+                         <form id="formData" action="https://formsubmit.co/satyabratasuar163@gmail.com" method="POST"
+                            class="space-y-6">
 
+                            <!-- REQUIRED SETTINGS -->
+                            <input type="hidden" name="_captcha" value="false">
+
+                            <!-- EMAIL SUBJECT -->
+                            <input type="hidden" name="_subject" value="🔔 New Contact Message – Portfolio">
+
+                            <!-- CLEAN TABLE FORMAT -->
+                            <input type="hidden" name="_template" value="table">
+
+                            <!-- IMPORTANT: Reply goes to sender -->
+                            <input type="hidden" name="_replyto" value="%email%">
+
+                            <!-- NAME -->
                             <div>
                                 <label class="form-label">Your Name</label>
-                                <input type="text" name="name" required class="form-input">
+                                <input type="text" name="Name" required class="form-input">
                             </div>
 
+                            <!-- EMAIL -->
                             <div>
                                 <label class="form-label">Email Address</label>
-                                <input type="email" name="email" required class="form-input">
+                                <input type="email" name="Email" required class="form-input">
                             </div>
 
+                            <!-- PHONE -->
                             <div>
                                 <label class="form-label">Phone Number</label>
-                                <input type="tel" name="phone" required class="form-input">
+                                <input type="tel" name="Phone" class="form-input">
                             </div>
 
+                            <!-- MESSAGE -->
                             <div>
                                 <label class="form-label">Your Message</label>
-                                <textarea name="message" rows="4" required class="form-input"></textarea>
+                                <textarea name="Message" rows="4" required class="form-input"></textarea>
                             </div>
 
+                            <!-- SUBMIT -->
                             <button type="submit" class="form-button">
                                 Send Message
                             </button>
@@ -971,48 +989,36 @@
 
 
     <!-- ================= EMAILJS CDN ================= -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 
     <script>
         /**************************************************
-         * 🔴 STEP 1: REPLACE WITH YOUR EMAILJS PUBLIC KEY
-         **************************************************/
-        emailjs.init("30ugF0zWy_r_n0ttw");
-
-        /**************************************************
-         * TOGGLE FORM OPEN / CLOSE
+         * TOGGLE CONTACT FORM OPEN / CLOSE
          **************************************************/
         function toggleForm() {
-            document.getElementById("contactForm").classList.toggle("hidden");
+            const form = document.getElementById("contactForm");
+            form.classList.toggle("hidden");
         }
 
         /**************************************************
-         * 🔴 STEP 2: REPLACE SERVICE & TEMPLATE IDs
+         * OPTIONAL: SUCCESS MESSAGE HANDLING
+         * (Works AFTER FormSubmit redirects back)
          **************************************************/
-        document.getElementById("formData").addEventListener("submit", function (e) {
-            e.preventDefault();
+        const form = document.getElementById("formData");
+        const successMsg = document.getElementById("successMsg");
 
-            emailjs.sendForm(
-                "service_vn39xwf",   // 🔴 Replace
-                "template_81f333e",  // 🔴 Replace
-                this
-            ).then(
-                function () {
-                    document.getElementById("successMsg").classList.remove("hidden");
-                    document.getElementById("formData").reset();
+        if (form) {
+            form.addEventListener("submit", function () {
+                // Show success message
+                successMsg.classList.remove("hidden");
 
-                    // Auto close popup
-                    setTimeout(() => {
-                        document.getElementById("contactForm").classList.add("hidden");
-                        document.getElementById("successMsg").classList.add("hidden");
-                    }, 3000);
-                },
-                function (error) {
-                    alert("❌ Message failed. Try again!");
-                    console.error(error);
-                }
-            );
-        });
+                // Auto close popup after 3s
+                setTimeout(() => {
+                    document.getElementById("contactForm").classList.add("hidden");
+                    successMsg.classList.add("hidden");
+                }, 3000);
+            });
+        }
     </script>
 
 
